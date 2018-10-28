@@ -1,5 +1,5 @@
-# (ANVERSO)
-**ID:** 4 **Cargar clases**
+﻿# (ANVERSO)
+**ID:** 4 **Buscar alumno**
 
 ---
 Quiero tener la posibilidad de buscar a un alumno por su DNI o por el grupo al que pertenece
