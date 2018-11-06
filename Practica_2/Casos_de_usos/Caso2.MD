@@ -1,6 +1,6 @@
 ## Guardar clase
 
-**ID: 02 **
+**ID: 02**
 **Breve Descripción: Almacenar información con respeto a las clases**
 
 ---
