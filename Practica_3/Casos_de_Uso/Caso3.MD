@@ -15,7 +15,7 @@
 2. **Flujo Principal**
 
   > * El caso de uso da comienzo cuando el usuario quiere importar una clase desde un fichero.
-  > * El sistema almacena la información del fichero.
+  > * El sistema recoge la información del fichero binario.
 
 3. **Postcondiciones**
 

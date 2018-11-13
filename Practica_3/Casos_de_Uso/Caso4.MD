@@ -21,6 +21,8 @@
 3. **Postcondiciones**
 
   > * La información del alumno debe aparecer en la pantalla.
+  > * Si hay varios alumnos con el mismo apellido se mostrará por pantalla todos los alumnos con el apellido.
+  > * Si buscamos por grupos, se mostrará por pantalla todos los alumnos pertenecientes a dicho grupo.
 
 4. **Flujos alternativos**
 
