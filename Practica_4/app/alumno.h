@@ -1,3 +1,6 @@
+#ifndef ALUMNO_H
+#define ALUMNO_H
+
 #include <string>
 
 class Alumno {
@@ -8,10 +11,11 @@ class Alumno {
 		strgin email_;
 		string tlf_;
 		string dir_;
-		string curso_;
+		int curso_;
 		string fecnac_;
-		string equipo_;
+		int equipo_;
 		bool lider_;
+		
 	public:
 		/* Constructor por defecto */
 		Alumno(const string &dni, const string &nombre, const string &ape, const string &email,	\ 
@@ -25,9 +29,9 @@ class Alumno {
 		string getEmail() { return email_; };
 		string getTlf() { return tlf_; };
 		string getDir() { return dir_; };
-		string getCurso() { return curso_; };
+		int getCurso() { return curso_; };
 		string getFecnac() { return fecnac_; };
-		string getEquipo() { return equipo_; };
+		int getEquipo() { return equipo_; };
 		bool getLider() { return lider_; };
 
 		/* Setters */
@@ -37,10 +41,12 @@ class Alumno {
 		void setEmail(const string &email);
 		void setTlf(const string &tlf);
 		void setDir(const string &dir);
-		void setCurso(const string &curso);
+		void setCurso(const int curso);
 		void setFecnac(const string &fecnac);
-		void setEquipo(const string &equipo);
+		void setEquipo(const int equipo);
 		void setLider(bool lider) { lider_ = lider; };
 
 		void listarAlumno();
 };
+
+#endif

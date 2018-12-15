@@ -3,8 +3,8 @@
 #include "alumno.h"
 
 Alumno::Alumno(const string &dni, const string &nombre, const string &ape, const string &email,	\
-		const string &tlf, const string &dir, const string &curso, const string &fecnac,\
-		const string &equipo, bool lider)
+		const string &tlf, const string &dir, const int curso, const string &fecnac,\
+		const int equipo, bool lider)
 {
 	dni_.assign(dni);
 	nombre_.assign(nombre);
@@ -24,9 +24,9 @@ Alumno::setApellidos(const string &ape) { apellidos_.assign(ape); }
 Alumno::setEmail(const string &email) { email_.assign(email); }
 Alumno::setTlf(const string &tlf) { tlf_.assign(tlf); }
 Alumno::setDir(const string &dir) { dir_.assign(dir); }
-Alumno::setCurso(const string &curso) { curso_.assign(curso); }
+Alumno::setCurso(const int curso) { curso_.assign(curso); }
 Alumno::setFecnac(const string &fecnac) { fecnac_.assign(fecnac); }
-Alumno::setEquipo(const string &equipo) { equipo_.assign(equipo); }
+Alumno::setEquipo(const int equipo) { equipo_.assign(equipo); }
 
 Alumno::listarAlumno()
 {
