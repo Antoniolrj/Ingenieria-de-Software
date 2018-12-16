@@ -11,6 +11,9 @@ class Agenda {
 		/* Getters */
 		std::vector <Alumno> getAgenda() { return agenda_; };
 
+		/* Setters */
+		void setAgenda(std::vector<Alumno> *v) { agenda_ = *v; };
+
 		void listarAlumnos();
 		void nuevoAlumno(Alumno &a);
 		Alumno buscarAlumnoDNI(string &dni);
