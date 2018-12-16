@@ -1,3 +1,3 @@
 # Sprint backlog
 
-![alt text](https://i.ibb.co/wKfbXR9/IMG-20181209-220806-374.jpg "img1")
+![alt text](https://github.com/whit3w0lf/Ingenieria-de-Software/blob/master/Practica_4/Sprint%20Backlog%202.png "img1")
