@@ -9,11 +9,7 @@ void Agenda::listarAlumnos(){
 	}
 }
 
-void Agenda::nuevoAlumno(Alumno &a){
-	agenda_.push_back(a);
-}
-
-Alumno Agenda::buscarAlumnoDNI(string &dni){
+Alumno Agenda::buscarAlumnoDNI(std::string &dni){
 	for(int i=0;i<agenda_.size();i++){
 		if(agenda_[i].getDNI()==dni){
 			return agenda_[i];
@@ -21,7 +17,7 @@ Alumno Agenda::buscarAlumnoDNI(string &dni){
 	}
 }
 
-std::vector <Alumno> Agenda::buscarAlumnoEquipo(string &equipo){
+std::vector <Alumno> Agenda::buscarAlumnoEquipo(int equipo){
 	std::vector <Alumno> alumnos;
 	
 	for(int i=0;i<agenda_.size();i++){
@@ -33,18 +29,18 @@ std::vector <Alumno> Agenda::buscarAlumnoEquipo(string &equipo){
 	return alumnos;
 }
 
-void Agenda::actuAlumno(const string &dni,Alumno &a){
-	for(int i=0;i<agenda_size();i++){
+void Agenda::actuAlumno(const std::string &dni,Alumno &a){
+	for(int i=0;i<agenda_.size();i++){
 		if(agenda_[i].getDNI()==dni){
 			agenda_[i]=a;
 		}
 	}
 }
 
-void Agenda::eliminarAlumno(const string &dni){
-	for(int i=0;i<agenda_size();i++){
+void Agenda::eliminarAlumno(const std::string &dni){
+	for(int i=0;i<agenda_.size();i++){
 		if(agenda_[i].getDNI()==dni){
-			agenda_.erase(i);
+			agenda_.erase(agenda_.begin()+i);
 		}
 	}
 }

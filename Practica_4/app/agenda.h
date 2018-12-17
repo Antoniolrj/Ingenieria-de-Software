@@ -3,23 +3,36 @@
 
 #include <vector>
 #include "alumno.h"
+#include <string>
 
-class Agenda {
+class Agenda{
 	private:
 		std::vector <Alumno> agenda_;
+		
 	public:
 		/* Getters */
-		std::vector <Alumno> getAgenda() { return agenda_; };
+		inline std::vector <Alumno> getAgenda(){
+			return agenda_;
+		}
 
 		/* Setters */
-		void setAgenda(std::vector<Alumno> *v) { agenda_ = *v; };
+		inline void setAgenda(std::vector <Alumno> agenda){
+			agenda_=agenda;
+		}
 
 		void listarAlumnos();
-		void nuevoAlumno(Alumno &a);
-		Alumno buscarAlumnoDNI(string &dni);
-		vector <Alumno> buscarAlumnoEquipo(string &equipo);
-		void actuAlumno(const string &dni,Alumno &a);
-		void eliminarAlumno(const string &dni);
+		
+		inline void nuevoAlumno(Alumno &a){
+			agenda_.push_back(a);
+		}
+		
+		Alumno buscarAlumnoDNI(std::string &dni);
+		
+		std::vector <Alumno> buscarAlumnoEquipo(int equipo);
+		
+		void actuAlumno(const std::string &dni,Alumno &a);
+		
+		void eliminarAlumno(const std::string &dni);
 };
 
 #endif

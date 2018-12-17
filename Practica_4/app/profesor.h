@@ -5,35 +5,41 @@
 #include <vector>
 #include "agenda.h"
 
-class Profesor {
-	private:
-		/*
-		 *  0 -> Docente
-		 *  1 -> Gestor
-		 */
-		int rol_;
-	public:
-		Profesor(int rol);
-		int getRol() { return rol_; };
-};
-
-class Docente : public Profesor {
+class Profesor{
 	private:
 		std::string agenda_;
+		bool coordinador_;
+		
 	public:
-		Docente(const string &agenda);
-		std::string getAgenda() { return agenda_; };
-		void setAgenda(const string &agenda);
-		void guardarClase(std::vector<Alumno> clase);
-		void cargarClase(Agenda &agenda);
-};
-
-class Gestor : public Profesor {
-	private:
-		std::string archivo_;
-	public:
-		Gestor(const string &nombre);
+		Profesor(std::string agenda,bool coordinador){
+			agenda_=agenda;
+			coordinador=coordinador;
+		}
+		
+		Profesor(){};
+		
+		inline std::string getAgenda(){
+			return agenda_;
+		}
+		
+		inline bool getCoordinador(){
+			return coordinador_;
+		}
+		
+		inline void setAgenda(const std::string &agenda){
+			agenda_=agenda;
+		}
+		
+		inline void setCoordinador(bool coordinador){
+			coordinador_=coordinador;
+		}
+		
+		void guardarClase(std::vector <Alumno> &clase);
+		
+		void cargarClase(std::vector <Alumno> &agenda);
+		
 		void guardarBackup();
+		
 		void cargarBackup();
 };
 
