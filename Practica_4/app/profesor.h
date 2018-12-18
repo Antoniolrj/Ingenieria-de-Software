@@ -26,7 +26,7 @@ class Profesor{
 			return coordinador_;
 		}
 		
-		inline void setAgenda(const std::string &agenda){
+		inline void setAgenda(std::string agenda){
 			agenda_=agenda;
 		}
 		
@@ -34,13 +34,13 @@ class Profesor{
 			coordinador_=coordinador;
 		}
 		
-		void guardarClase(std::vector <Alumno> &clase);
+		bool cargarClase(std::string nombre_fichero,Agenda &agenda);
 		
-		void cargarClase(std::vector <Alumno> &agenda);
-		
-		void guardarBackup();
+		bool guardarClase(std::string nombre_fichero,Agenda &agenda);
 		
 		void cargarBackup();
+		
+		void guardarBackup();
 };
 
 #endif

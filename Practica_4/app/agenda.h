@@ -26,7 +26,7 @@ class Agenda{
 			agenda_.push_back(a);
 		}
 		
-		Alumno buscarAlumnoDNI(std::string &dni);
+		Alumno buscarAlumnoDNI(std::string dni);
 		
 		std::vector <Alumno> buscarAlumnoEquipo(int equipo);
 		

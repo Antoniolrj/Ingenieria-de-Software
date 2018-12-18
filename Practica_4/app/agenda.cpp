@@ -9,7 +9,7 @@ void Agenda::listarAlumnos(){
 	}
 }
 
-Alumno Agenda::buscarAlumnoDNI(std::string &dni){
+Alumno Agenda::buscarAlumnoDNI(std::string dni){
 	for(int i=0;i<agenda_.size();i++){
 		if(agenda_[i].getDNI()==dni){
 			return agenda_[i];

@@ -2,27 +2,7 @@
 #include <fstream>
 #include <iostream>
 
-void Profesor::guardarClase(std::vector<Alumno> &clase){
-	std::fstream f;
-
-	f.open(agenda_.c_str(), std::ios::out | std::ios::binary);
-
-	for (int i=0;i<clase.size();i++) {
-		f << clase[i].getDNI() << clase[i].getNombre() << clase[i].getApellidos() << clase[i].getEmail() << clase[i].getTlf() << clase[i].getDir() << clase[i].getCurso() << clase[i].getFecnac() << clase[i].getEquipo();
-		
-		if(clase[i].getLider()){
-			f << "si" << std::endl;
-		}
-		
-		else{
-			f << "no" << std::endl;
-		}
-	}
-
-	f.close();
-}
-
-void Profesor::cargarClase(std::vector <Alumno> &agenda){
+bool Profesor::cargarClase(std::string nombre_fichero,Agenda &agenda){
 	std::fstream f;
 	std::string dni;
 	std::string nombre;
@@ -35,8 +15,13 @@ void Profesor::cargarClase(std::vector <Alumno> &agenda){
 	int equipo;
 	std::string lid;
 	bool lider;
+	std::vector <Alumno> alumnos;
 
-	f.open(agenda_.c_str(), std::ios::in | std::ios::binary);
+	f.open(nombre_fichero.c_str(), std::ios::in | std::ios::binary);
+	
+	if(!f){
+		return false;
+	}
 
 	while(f >> dni){
 		f >> nombre >> apellidos >> email >> tlf >> dir >> curso >> fecnac >> equipo >> lid;
@@ -51,8 +36,38 @@ void Profesor::cargarClase(std::vector <Alumno> &agenda){
 		
 		Alumno a(dni,nombre,apellidos,email,tlf,dir,curso,fecnac,equipo,lider);
 		
-		agenda.push_back(a);
+		alumnos.push_back(a);
+	}
+	
+	agenda.setAgenda(alumnos);
+
+	f.close();
+	
+	return true;
+}
+
+bool Profesor::guardarClase(std::string nombre_fichero,Agenda &agenda){
+	std::fstream f;
+
+	f.open(nombre_fichero.c_str(), std::ios::out | std::ios::binary);
+	
+	if(!f){
+		return false;
+	}
+
+	for (int i=0;i<agenda.getAgenda().size();i++) {
+		f << agenda.getAgenda()[i].getDNI() << agenda.getAgenda()[i].getNombre() << agenda.getAgenda()[i].getApellidos() << agenda.getAgenda()[i].getEmail() << agenda.getAgenda()[i].getTlf() << agenda.getAgenda()[i].getDir() << agenda.getAgenda()[i].getCurso() << agenda.getAgenda()[i].getFecnac() << agenda.getAgenda()[i].getEquipo();
+		
+		if(agenda.getAgenda()[i].getLider()){
+			f << "si" << std::endl;
+		}
+		
+		else{
+			f << "no" << std::endl;
+		}
 	}
 
 	f.close();
+	
+	return true;
 }
