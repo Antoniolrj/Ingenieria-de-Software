@@ -109,4 +109,4 @@ Si por cualquier causa un usuario ha perdido su nombre y/o contraseña, deberá 
 ### Localización de las copias y de las bases de datos
 
 Todas las bases de datos de las clases y las copias de seguridad se localizarán en la terminal donde esté instalada el sistema.
-La base de datos de los usuarios se localizará en una terminal principal.
+La base de datos de los usuarios y sus copias de seguridad se localizarán en una terminal principal.
