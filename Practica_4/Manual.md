@@ -101,3 +101,12 @@ El sistema también generará copias de seguridad de los usuarios registrados. S
 Las copias de seguridad de los usuarios se generarán usando el siguiente formato:
 
 > user_backup-fecha-hora
+
+### Pérdida de usuario y/o contraseña
+
+Si por cualquier causa un usuario ha perdido su nombre y/o contraseña, deberá contactar con un administrador del sistema para cambiar su contraseña o para indicarle cual es la actual.
+
+### Localización de las copias y de las bases de datos
+
+Todas las bases de datos de las clases y las copias de seguridad se localizarán en la terminal donde esté instalada el sistema.
+La base de datos de los usuarios se localizará en una terminal principal.
