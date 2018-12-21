@@ -115,7 +115,7 @@ Quiero que la información relacionada con el equipo al que pertenece un alumno 
 
 ---
 
-Quiero tener la posibilidad de buscar a un alumno por su DNI o por el grupo al que pertenece
+Quiero tener la posibilidad de buscar a un alumno por su DNI, nombre, apellido, la clase o por el grupo al que pertenece
 
 **Prioridad**: 3
 
