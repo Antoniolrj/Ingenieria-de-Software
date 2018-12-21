@@ -2,7 +2,7 @@
 
 ## Manual de usuario
 
-El sistema ACA es un sistema desarrollado para uso educativo, principalmente usado por profesores, que permite la organización del alumnado y de las clases de cada profesor. Este documento cubrirá todas las funciones del sistema ACA, su correcto uso y las opciones disponibles para la realización de dichas tareas.
+El sistema ACA es un sistema desarrollado para uso educativo, principalmente por profesores, que permite la organización del alumnado y de las clases de cada profesor. Este documento cubrirá todas las funciones del sistema ACA, su correcto uso y las opciones disponibles para la realización de dichas tareas.
 
 El sistema está escrito en el lenguaje de programación C++ y es completamente compatible con cualquier sistema operativo basado en GNU/Linux.
 
@@ -30,7 +30,7 @@ Una vez introducido las credenciales y accedido al sistema, el usuario verá el 
 
 #### 1.Almacenar alumno
 
-Esta opción permitirá almacenar un alumno en el sistema, con la información de ese alumno, como DNI, nombre, apellido y sus notas e información especificada por el profesor. Los campos de nombre, apellido y DNI serán obligatorios para poder almacenar el alumno en el sistema.
+Esta opción permitirá almacenar un alumno en el sistema, con la información de ese alumno, como DNI, nombre, apellido y sus notas e información especificada por el profesor. Los campos de nombre, apellido, DNI y clase a la que pertenecen serán obligatorios para poder almacenar el alumno en el sistema.
 
 Si no se puede almacenar un alumno por que alguno de los campos obligatorios no es correcto o no está rellenado, se indicará el error y se volverá al menú principal.
 
@@ -48,11 +48,13 @@ Si alguno de los campos obligatorios no está indicado, se indicará un error po
 
 Esta opción permitirá buscar un alumno por su DNI, nombre, apellido, clase o grupo al que pertenece. Se mostrará por pantalla la información de dicho alumno: su nombre y apellido, DNI, clase y grupo a la que pertenece, si es lider de grupo o no y las notas e información indicadas por el profesor.
 
-Si el DNI o el grupo que se está buscando no existe o es erróneo, se indicará por pantalla y será devuelto al menú principal.
+Si la información indicada para realizar la búsqueda no existe o es erróneo, se indicará por pantalla y será devuelto al menú principal.
 
 #### 4. Eliminar alumno
 
 Esta opción permite borrar a un alumno y los registros e información de dicho alumno. También le permite eliminar un alumno de una clase o grupo, pero sin eliminar su información. Para poder hacerlo, buscaremos al alumno por los mismos medios indicados en la seccion "Buscar Alumno" y activaremos la opción "Eliminar alumno" y deberemos especificar qué clase de eliminado queremos realizar.
+
+Si eliminamos un alumno de una clase, debemos indicar a qué clase nueva pertenece, pues el campo de "Clase a la que pertenece" es un campo obligatorio.
 
 Dicho alumno debe existir en el sistema para poder ser eliminado, de lo contrario, se indicará un error por pantalla y se volverá al menú principal.
 
@@ -71,3 +73,31 @@ Esta opción nos permite ver todos los alumnos de una clase, ordenados por apell
   - Nombre y apellidos de los alumnos
 
 Si la clase indicada es errónea o no existe, se indicará un mensaje por pantalla con el error y se volverá al menú principal.
+
+### Base de datos
+
+Las clases y los usuarios se guardarán en ficheros generados automaticamente por el sistema. Dichos ficheros se encontrarán en carpetas separadas.
+
+Las clases se organizarán en carpetas separadas para cada clase y dentro de dicha clase habrá una carpeta de copia de seguridad donde se almacenarán todas las copias de seguridad realizadas por el sistema para dicha clase.
+
+Los usuarios se organizarán en una sola carpeta en la que podremos encontrar el fichero con la información de las cuentas del sistema. A su vez, habrá una subcarpeta para las copias de seguridad.
+
+### Copias de Seguridad
+
+El sistema realiza copias de seguridad de cada clase con la información de dicha clase y de sus alumnos. No se podrán almacenar más de 150 alumnos por clase. El profesor podrá usar esas copias de seguridad para volver a una versión anterior de la clase en caso de fallo del sistema o de error del usuario. El sistema realiza copias de seguridad de forma automática cada día, iniciando el procedimiento 24 horas después de la creación de la clase y repitiendose cada 24 horas. Las copias de seguridad no se sobreescriben, cada día se genera un nuevo fichero binario con los cambios realizados ese dia. Las copias de seguridad solamente se realizaran en los días en los que hayan cambios en una clase. Si no se ha generado ningun cambio o añadido a una clase, no se generará una copia de seguridad para dicho día.
+
+Las copias de seguridad indicará en el nombre del fichero el token del profesor, el nombre de la clase, la fecha (día/mes/año) y la hora a la que se habrá creado el archivo usando el siguiente formato:
+
+> token_del_profesor-nombre_clase-fecha-hora
+
+Dentro del fichero también se indicará el token del profesor, nombre de la clase, fecha y hora además del nombre del usuario que ha generado dicha copia y, por supuesto, la información de dicha clase.
+
+El usuario no administrador podrá hacer uso de sus copias de seguridad sin ninguna restricción pero no podrá acceder a las demás copias de seguridad de los demás profesores. Esta restricción será posible mediante el token que cada usuario tendrá asignado a su cuenta.
+
+El token de cada usuario es una combinación entre números y letras (tanto mayusculas como minusculas) generadas aleatoriamente en la creación de la cuenta y asignada a dicha cuenta. Cada vez que se haga una copia de seguridad de un usuario, el sistema usará ese token para limitar el acceso a unicamente las copias que tengan el token de dicho usuario.
+
+El sistema también generará copias de seguridad de los usuarios registrados. Sin embargo, estas copias de seguridad se harán manualmente mediante una opción del sistema a la que sólo tendrán acceso los administradores del sistema.
+
+Las copias de seguridad de los usuarios se generarán usando el siguiente formato:
+
+> user_backup-fecha-hora
