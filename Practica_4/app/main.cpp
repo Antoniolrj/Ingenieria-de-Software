@@ -1,6 +1,4 @@
 #include "funciones.h"
-#include "profesor.h"
-#include <iostream>
 #include "macros.h"
 
 int main(){
@@ -11,17 +9,10 @@ int main(){
 	int busqueda;
 
 	do{
-		do{
-			opcion=menuPrincipal();
-			
-			if(opcion<0 or opcion>2){
-				std::cout << CLEAR_SCREEN;
-				
-				std::cout << BRED << "Error: no ha introducido ninguna opcion valida" << RESET;
-			}
-		}while(opcion<0 or opcion>2);
+		opcion=menuPrincipal();
 		
 		std::cout << CLEAR_SCREEN;
+		
 		LUGAR(5,1);
 		
 		switch(opcion){
@@ -32,17 +23,19 @@ int main(){
 				
 			case 1:
 				std::cout << "[1] Iniciar sesion" << std::endl;
-				inicioSesion();
+				
+				iniciado=inicioSesion(profesor);
 				
 				break;
 				
 			case 2:
 				std::cout << "[2] Registrarse" << std::endl;
+				
 				registro();
 				
 				break;
 		}
-	}while(!iniciado and opcion!=0);
+	}while(!iniciado);
 	
 	do{
 		opcion=menuSesion();
@@ -89,6 +82,8 @@ int main(){
 			case 5:
 				std::cout << "[5] Borrar clase" << std::endl;
 				
+				borrarClase(agenda);
+				
 				break;
 				
 			case 6:
@@ -101,7 +96,9 @@ int main(){
 			case 7:
 				std::cout << "[7] Insertar alumno" << std::endl;
 				
-				insertarAlumno(agenda);
+				if(profesor.getCoordinador()){
+					insertarAlumno(agenda);
+				}
 				
 				break;
 				
@@ -113,7 +110,9 @@ int main(){
 			case 9:
 				std::cout << "[9] Borrar alumno" << std::endl;
 				
-				borrarAlumno(agenda);
+				if(profesor.getCoordinador()){
+					borrarAlumno(agenda);
+				}
 				
 				break;
 				

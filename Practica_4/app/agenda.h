@@ -11,19 +11,35 @@ class Agenda{
 		
 	public:
 		/* Getters */
-		inline std::vector <Alumno> getAgenda(){
+		inline std::vector <Alumno> &getAgenda(){
 			return agenda_;
 		}
 
 		/* Setters */
 		inline void setAgenda(std::vector <Alumno> agenda){
 			agenda_=agenda;
+			
+			#ifndef NDEBUG
+				assert(getAgenda()==agenda);
+			#endif
 		}
 
 		void listarAlumnos();
 		
+		bool existeAlumno(std::string dni);
+		
+		bool existeAlumno(int equipo);
+		
 		inline void nuevoAlumno(Alumno &a){
+			#ifndef NDEBUG
+				assert(a.getDNI()!="" and !existeAlumno(a.getDNI()));
+			#endif
+			
 			agenda_.push_back(a);
+			
+			#ifndef NDEBUG
+				assert(existeAlumno(a.getDNI()));
+			#endif
 		}
 		
 		Alumno buscarAlumnoDNI(std::string dni);

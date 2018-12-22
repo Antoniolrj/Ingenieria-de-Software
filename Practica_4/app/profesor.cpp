@@ -1,73 +1,66 @@
 #include "profesor.h"
 #include <fstream>
-#include <iostream>
 
 bool Profesor::cargarClase(std::string nombre_fichero,Agenda &agenda){
-	std::fstream f;
-	std::string dni;
-	std::string nombre;
-	std::string apellidos;
-	std::string email;
-	std::string tlf;
-	std::string dir;
-	int curso;
-	std::string fecnac;
-	int equipo;
-	std::string lid;
-	bool lider;
-	std::vector <Alumno> alumnos;
-
-	f.open(nombre_fichero.c_str(), std::ios::in | std::ios::binary);
+	#ifndef NDEBUG
+		assert(nombre_fichero.size()>4 and nombre_fichero.find(".dat")!=std::string::npos);
+	#endif
 	
-	if(!f){
+	Alumno alumno;
+	
+	std::fstream fichero(nombre_fichero.c_str(),std::ios::app | std::ios::in | std::ios::out | std::ios::binary);
+	
+	if(!fichero){
+		std::cout << "Error: no se pudo establecer la conexion con la base de datos" << std::endl;
+		
 		return false;
 	}
-
-	while(f >> dni){
-		f >> nombre >> apellidos >> email >> tlf >> dir >> curso >> fecnac >> equipo >> lid;
-		
-		if(lid=="si"){
-			lider=true;
-		}
-		
-		else{
-			lider=false;
-		}
-		
-		Alumno a(dni,nombre,apellidos,email,tlf,dir,curso,fecnac,equipo,lider);
-		
-		alumnos.push_back(a);
-	}
 	
-	agenda.setAgenda(alumnos);
-
-	f.close();
+	fichero.seekg(0);
+	
+	agenda.getAgenda().resize(0);
+	
+	do{
+		fichero.read((char *)&alumno,sizeof(alumno));
+		
+		agenda.getAgenda().push_back(alumno);
+	}while(!fichero.eof());
+	
+	std::cout << "Clase cargada" << std::endl;
+	std::cout << "Pulse cualquier tecla para continuar" << std::endl;
+	
+	std::cin.ignore();
+	std::cin.ignore();
+	
+	fichero.close();
 	
 	return true;
 }
 
 bool Profesor::guardarClase(std::string nombre_fichero,Agenda &agenda){
-	std::fstream f;
-
-	f.open(nombre_fichero.c_str(), std::ios::out | std::ios::binary);
+	#ifndef NDEBUG
+		assert(nombre_fichero.size()>4 and nombre_fichero.find(".dat")!=std::string::npos and !agenda.getAgenda().empty());
+	#endif
 	
-	if(!f){
+	std::fstream fichero("profesores.bin",std::ios::app | std::ios::in | std::ios::out | std::ios::binary);
+	
+	if(!fichero){
+		std::cout << "Error: no se pudo establecer la conexion con la base de datos" << std::endl;
+		std::cin.ignore();
+		std::cin.ignore();
+		
 		return false;
 	}
-
-	for (int i=0;i<agenda.getAgenda().size();i++) {
-		f << agenda.getAgenda()[i].getDNI() << agenda.getAgenda()[i].getNombre() << agenda.getAgenda()[i].getApellidos() << agenda.getAgenda()[i].getEmail() << agenda.getAgenda()[i].getTlf() << agenda.getAgenda()[i].getDir() << agenda.getAgenda()[i].getCurso() << agenda.getAgenda()[i].getFecnac() << agenda.getAgenda()[i].getEquipo();
-		
-		if(agenda.getAgenda()[i].getLider()){
-			f << "si" << std::endl;
-		}
-		
-		else{
-			f << "no" << std::endl;
-		}
-	}
-
-	f.close();
+	
+	fichero.seekp(0);
+	
+	fichero.write((char *)&agenda.getAgenda(),sizeof(agenda.getAgenda()));
+	
+	fichero.close();
+	
+	std::cout << "Registro completado" << std::endl;
+	std::cin.ignore();
+	std::cin.ignore();
 	
 	return true;
 }
