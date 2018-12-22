@@ -10,7 +10,7 @@ ndebug: objetivo
 
 #Para general a documentacion
 main.exe: $(OBJETOS)
-								g++ main.cpp $(OBJETOS) -o main.exe 	 
+								g++ main.cpp $(OBJETOS) -o main 	 
 
 funciones.o: funciones.cpp funciones.h
 								g++ $(CPPFLAGS) funciones.cpp
