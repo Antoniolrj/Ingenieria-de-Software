@@ -40,6 +40,8 @@ La prioridad de cada uno de los requisitos vendrá determinada por una numeraci�
 	* Por curso matriculado
 	
 8.  (**2**) El profesor deberá ser capaz de registrarse en el sistema.
+
+9. (**2**) El profesor deberá ser capaz de iniciar sesión en el sistema.
 	
 ### Requisitos no Funcionales
 
