@@ -203,12 +203,17 @@ void buscarAlumnos(Profesor &profesor,Agenda &agenda){
 		std::string dni;
 		int equipo;
 		std::vector <Alumno> alumnos;
+		std::string nombre;
+		std::string apellidos;
 	
 		std::cout << IYELLOW << "Especifique como desea buscar a los alumnos :" << RESET << std::endl;
 		std::cout << "[1] Por DNI" << std::endl;
 		std::cout << "[2] Por grupo" << std::endl;
+		std::cout << "[3] Por nombre" << std::endl;
+		std::cout << "[4] Por apellidos" << std::endl;
 		std::cout << "Opcion: ";
 		std::cin >> busqueda;
+		std::cout << std::endl;
 				
 		switch(busqueda){
 			case 1:
@@ -253,6 +258,66 @@ void buscarAlumnos(Profesor &profesor,Agenda &agenda){
 							alumnos[i].listarAlumno();
 							std::cout << std::endl;
 						}
+					}
+				}
+						
+				break;
+				
+			case 3:
+				std::cout << IYELLOW << "Introduzca el nombre del alumno a buscar: " << RESET;
+				std::cin.ignore();
+				getline(std::cin,nombre);
+				
+				if(nombre==""){
+					std::cout << BRED << "Error: no se ha introducido ningun nombre" << RESET << std::endl;
+					std::cin.ignore();
+				}
+				
+				else{
+					if(!agenda.existeAlumnoNombre(nombre)){
+						std::cout << BRED << "Error: no existe ningun alumno con el nombre especificado" << RESET << std::endl;
+						std::cin.ignore();
+					}
+					
+					else{
+						alumnos=agenda.buscarAlumnoNombre(nombre);
+						
+						for(unsigned int i=0;i<alumnos.size();i++){
+							alumnos[i].listarAlumno();
+							std::cout << std::endl;
+						}
+						
+						std::cin.ignore();
+					}
+				}
+						
+				break;
+			
+			case 4:
+				std::cout << IYELLOW << "Introduzca el apellidos del alumno a buscar: " << RESET;
+				std::cin.ignore();
+				getline(std::cin,nombre);
+				
+				if(apellidos==""){
+					std::cout << BRED << "Error: no se ha introducido ningun apellido" << RESET << std::endl;
+					std::cin.ignore();
+				}
+				
+				else{
+					if(!agenda.existeAlumnoApellidos(apellidos)){
+						std::cout << BRED << "Error: no existe ningun alumno con los apellidos especificados" << RESET << std::endl;
+						std::cin.ignore();
+					}
+					
+					else{
+						alumnos=agenda.buscarAlumnoApellidos(apellidos);
+						
+						for(unsigned int i=0;i<alumnos.size();i++){
+							alumnos[i].listarAlumno();
+							std::cout << std::endl;
+						}
+						
+						std::cin.ignore();
 					}
 				}
 						

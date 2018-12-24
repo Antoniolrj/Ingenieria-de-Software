@@ -40,6 +40,34 @@ bool Agenda::existeAlumno(int equipo){
 	return false;
 }
 
+bool Agenda::existeAlumnoNombre(std::string nombre){
+	#ifndef NDEBUG
+		assert(nombre!="");
+	#endif
+	
+	for(unsigned int i=0;i<agenda_.size();i++){
+		if(agenda_[i].getNombre()==nombre){
+			return true;
+		}
+	}
+	
+	return false;
+}
+
+bool Agenda::existeAlumnoApellidos(std::string apellidos){
+	#ifndef NDEBUG
+		assert(apellidos!="");
+	#endif
+	
+	for(unsigned int i=0;i<agenda_.size();i++){
+		if(agenda_[i].getApellidos()==apellidos){
+			return true;
+		}
+	}
+	
+	return false;
+}
+
 Alumno Agenda::buscarAlumnoDNI(std::string dni){
 	#ifndef NDEBUG
 		assert(!getAgenda().empty() and dni!="" and existeAlumno(dni));
@@ -69,6 +97,38 @@ std::vector <Alumno> Agenda::buscarAlumnoEquipo(int equipo){
 	
 	for(unsigned int i=0;i<agenda_.size();i++){
 		if(agenda_[i].getEquipo()==equipo){
+			alumnos.push_back(agenda_[i]);
+		}
+	}
+	
+	return alumnos;
+}
+
+std::vector <Alumno> Agenda::buscarAlumnoNombre(std::string nombre){
+	#ifndef NDEBUG
+		assert(!getAgenda().empty() and nombre!="" and existeAlumnoNombre(nombre));
+	#endif
+	
+	std::vector <Alumno> alumnos;
+	
+	for(unsigned int i=0;i<agenda_.size();i++){
+		if(agenda_[i].getNombre()==nombre){
+			alumnos.push_back(agenda_[i]);
+		}
+	}
+	
+	return alumnos;
+}
+
+std::vector <Alumno> Agenda::buscarAlumnoApellidos(std::string apellidos){
+	#ifndef NDEBUG
+		assert(!getAgenda().empty() and apellidos!="" and existeAlumnoApellidos(apellidos));
+	#endif
+	
+	std::vector <Alumno> alumnos;
+	
+	for(unsigned int i=0;i<agenda_.size();i++){
+		if(agenda_[i].getApellidos()==apellidos){
 			alumnos.push_back(agenda_[i]);
 		}
 	}

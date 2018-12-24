@@ -30,6 +30,10 @@ class Agenda{
 		
 		bool existeAlumno(int equipo);
 		
+		bool existeAlumnoNombre(std::string nombre);
+		
+		bool existeAlumnoApellidos(std::string apellidos);
+		
 		inline void nuevoAlumno(Alumno &a){
 			#ifndef NDEBUG
 				assert(a.getDNI()!="" and !existeAlumno(a.getDNI()));
@@ -45,6 +49,10 @@ class Agenda{
 		Alumno buscarAlumnoDNI(std::string dni);
 		
 		std::vector <Alumno> buscarAlumnoEquipo(int equipo);
+		
+		std::vector <Alumno> buscarAlumnoNombre(std::string nombre);
+		
+		std::vector <Alumno> buscarAlumnoApellidos(std::string apellidos);
 		
 		void actuAlumno(const std::string &dni,Alumno &a);
 		
