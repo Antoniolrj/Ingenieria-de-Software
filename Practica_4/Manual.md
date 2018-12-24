@@ -14,6 +14,8 @@ El sistema permite la creación de más de una cuenta de usuario para los distin
 
 El usuario deberá introducir el usuario y la contraseña indicadas en el registro para poder acceder al sistema. Si el usuario introduce una contraseña erronea se le imprimirá un mensaje por pantalla diciendole que la contraseña no es correcta. En dicho caso, para recuperar su contraseña, debe contactar con un administrador, indicandole el nombre de cuenta al administrador.
 
+Si por cualquier razón no puede recuperar su cuenta, siempre puede crear otra cuenta.
+
 Si el usuario se ha autentificado correctamente, podrá acceder al menú principal del sistema y a sus bases de datos (clases y alumnos).
 
 Si el usuario no está registrado en el sistema, se le imprimirá un mensaje por pantalla indicandole que primero debe registrarse en el sistema y volverá a la pantalla de acreditación o registro.
@@ -24,52 +26,68 @@ Una vez introducido las credenciales y accedido al sistema, el usuario verá el 
 
 #### 1. Asignar clase
 
+Esta es la opción principal para poder crear clases o cambiar entre las clases bajo las cuales se agrupan los alumnos que pertenezcan a una clase.
 
+Las clases no podrán tener más de 150 alumnos.
 
-#### 2.Almacenar alumno
+Si intenta introducir más de 150 alumnos en una clase, se le indicará un error y volverá al menú principal.
 
-Esta opción permitirá almacenar un alumno en el sistema, con la información de ese alumno, como DNI, nombre, apellido y sus notas e información especificada por el profesor. Los campos de nombre, apellido, DNI y grupo al que pertenecen serán obligatorios para poder almacenar el alumno en el sistema.
+Para crear una nueva clase simplemente usamos esta opción y asignamos un nombre a la clase.
 
-Si no se puede almacenar un alumno por que alguno de los campos obligatorios no es correcto o no está rellenado, se indicará el error y se volverá al menú principal.
+Para cambiar a otra clase mientras ya hay una cargada, volvemos a usar esta opción e indicamos el nombre de la otra clase. Una vez hayamos hecho esto, volveremos al menú principal y podremos cargar la otra clase.
 
-#### 3. Crear clase
+Atención: Es recomendable guardar los cambios realizados en una clase antes de cambiar a otra.
 
-Esta opción permitirá crear una clase bajo la cual se podrán agrupar alumnos indicando que pertenecen a esa clase en concreto.
+#### 2. Cargar clase
 
-Las clases podrán tener un máximo de 150 alumnos asignados a ellas. Para poder crear una clase, debe indicar el nombre de la clase.
+Esta opción se usa en conjunto con la primera opción (Asignar clase). Una vez indicado el nombre de la clase a cargar en la opción "Asignar clase", podremos usar esta opcion para realizar el cargado de la clase.
 
-Si intenta introducir más de 150 alumnos en una clase, se le indicará el error y se volverá al menú principal.
+#### 3. Guardar clase
 
-Si alguno de los campos obligatorios no está indicado, se indicará un error por pantalla y se volverá al menú principal.
+Esta opción nos permite guardar una clase después de haberla creado (para crear una clase, volver al punto 1 "Asignar clase"). Guardará la clase y su información (alumnos e información de esos alumnos) en un fichero binario.
 
-#### 4. Buscar alumno
+Si la clase no ha podido ser guardada nos dará un error y volverá al menú principal.
 
-Esta opción permitirá buscar un alumno por su DNI, nombre, apellido, clase o grupo al que pertenece. Se mostrará por pantalla la información de dicho alumno: su nombre y apellido, DNI, clase y grupo a la que pertenece y si es lider de grupo o no 
+#### 4. Mostrar clase
+
+Esta opción nos permite ver todos los alumnos de una clase, además nos mostrará toda la información de los alumnos.
+
+Si la clase indicada es errónea o no existe, se indicará un mensaje por pantalla con el error y se volverá al menú principal.
+
+#### 5. Borrar clase
+
+Esta opción nos permite eliminar una clase y toda la información adjunta a ella. Para borrar una clase, primero tenemos que cargarla en el sistema.
+
+Si no se ha podido eliminar una clase, nos imprimirá un error por pantalla y se volverá al menú principal.
+
+#### 6. Buscar alumno
+
+Esta opción permitirá buscar un alumno por su DNI, nombre, apellido o grupo al que pertenece. Se mostrará por pantalla la información de dicho alumno: su nombre y apellido, DNI y grupo al que pertenece y si es lider de grupo o no 
 
 Si la información indicada para realizar la búsqueda no existe o es erróneo, se indicará por pantalla y será devuelto al menú principal.
 
-#### 5. Eliminar alumno
+#### 7.Insertar alumno
 
-Esta opción permite borrar a un alumno y los registros e información de dicho alumno. T Para poder hacerlo, buscaremos al alumno por los mismos medios indicados en la seccion "Buscar Alumno" y activaremos la opción "Eliminar alumno".
+Esta opción permitirá almacenar un alumno en el sistema, con la información de ese alumno, como DNI, nombre y apellido. Los campos de nombre, apellidos, DNI y grupo al que pertenecen serán obligatorios para poder almacenar el alumno en el sistema.
 
-Dicho alumno debe existir en el sistema para poder ser eliminado, de lo contrario, se indicará un error por pantalla y se volverá al menú principal.
+Si no se puede almacenar un alumno por por un fallo del usuario o del sistema, se indicará el error y se volverá al menú principal.
 
-#### 6. Actualizar alumno
+#### 8. Actualizar alumno
 
-Esta opción nos permite modificar la información de un alumno previamente buscado por DNI, nombre, apellidos, clase o grupo al que pertenece.
+Esta opción nos permite modificar la información de un alumno previamente buscado por DNI.
 
 Podremos modificar cualquier campo relacionado con ese alumno.
 
-Si alguno de los campos obligatorios ha sido eliminado, se indicará por pantalla dicho error y se volverá a la ficha del alumno.
+Hay que rellenar todos los campos para que la modificación se haga correctamente.
 
-#### 7. Listar alumnos
+#### 9. Eliminar alumno
 
-Esta opción nos permite ver todos los alumnos de una clase. La información que podremos ver es:
-  - DNI de los alumnos
-  - Nombre y apellidos de los alumnos
+Esta opción permite borrar a un alumno y los registros e información de dicho alumno. Para poder hacerlo, buscaremos al alumno por su DNI y activaremos la opción "Eliminar alumno".
 
-Si la clase indicada es errónea o no existe, se indicará un mensaje por pantalla con el error y se volverá al menú principal.
+Dicho alumno debe existir en el sistema para poder ser eliminado, de lo contrario, se indicará un error por pantalla y se volverá al menú principal.
 
 ### Base de datos
 
 Las clases y los usuarios se guardarán en ficheros binarios en la carpeta donde se ubica el sistema.
+
+Las clases serán guardadas bajo el nombre de la clase y los profesores registrados bajo un fichero llamado "profesores"
