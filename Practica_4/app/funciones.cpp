@@ -2,6 +2,7 @@
 #include "macros.h"
 #include <string.h>
 #include <fstream>
+#include <iostream>
 
 struct profesor{
 	char nick[50];
@@ -19,9 +20,7 @@ int menuPrincipal(){
 	std::cout << CLEAR_SCREEN;
 	
 	LUGAR(5,10);
-   	std::cout << BBLUE;
-	std::cout << "Programa principial | Opciones del menu";
-	std::cout << RESET;
+	std::cout << BBLUE << "Programa principial | Opciones del menu" << RESET;
 	
 	LUGAR(posicion++,10);
 	std::cout << "[1] Iniciar sesion";
@@ -33,9 +32,7 @@ int menuPrincipal(){
 	std::cout << GREEN << "[0] Salir";
 	
 	LUGAR(posicion++,20);
-	std::cout << IYELLOW;
-	std::cout << "Opcion: ";
-	std::cout << RESET;
+	std::cout << IYELLOW << "Opcion: " << RESET;
 	
 	std::cin >> opcion;
 	std::cin.ignore();
@@ -45,19 +42,19 @@ int menuPrincipal(){
 
 bool inicioSesion(Profesor &profesor){
 	struct profesor aux;
-	char nick[50];
-	char password[50];
+	std::string nick;
+	std::string password;
 	
-	std::cout << "Introduzca su nombre de usuario: ";
-	std::cin >> nick;
+	std::cout << IYELLOW << "Introduzca su nombre de usuario: " << RESET;
+	getline(std::cin,nick);
 	
-	std::cout << "Introduzca la password: ";
-	std::cin >> password;
+	std::cout << IYELLOW << "Introduzca la password: " RESET;
+	getline(std::cin,password);
 	
 	std::fstream fichero("profesores.bin",std::ios::app | std::ios::in | std::ios::out | std::ios::binary);
 	
 	if(!fichero){
-		std::cout << "Error: no se pudo establecer la conexion con la base de datos" << std::endl;
+		std::cout << BRED << "Error: no se pudo establecer la conexion con la base de datos" << RESET << std::endl;
 		
 		return false;
 	}
@@ -67,11 +64,8 @@ bool inicioSesion(Profesor &profesor){
 	fichero.read((char *)&aux,sizeof(aux));
 	
 	while(!fichero.eof()){
-		if(strcmp(nick,aux.nick)==0 and strcmp(password,aux.password)==0){
-			std::cout << "Acceso permitido" << std::endl;
-			std::cout << "Pulse cualquier tecla para continuar" << std::endl;
-			
-			std::cin.ignore();
+		if(strcmp(nick.c_str(),aux.nick)==0 and strcmp(password.c_str(),aux.password)==0){
+			std::cout << std::endl << CYAN << "Acceso permitido" << RESET << std::endl;
 			std::cin.ignore();
 			
 			profesor.setAgenda(aux.agenda);
@@ -85,10 +79,7 @@ bool inicioSesion(Profesor &profesor){
 		fichero.read((char *)&aux,sizeof(aux));
 	}
 	
-	std::cout << "Acceso denegado" << std::endl;
-	std::cout << "Pulse cualquier tecla para continuar" << std::endl;
-	
-	std::cin.ignore();
+	std::cout << std::endl << BRED << "Acceso denegado" << RESET << std::endl;
 	std::cin.ignore();
 	
 	fichero.close();
@@ -99,31 +90,34 @@ bool inicioSesion(Profesor &profesor){
 bool registro(){
 	struct profesor aux;
 	int coor;
+	std::string nick;
+	std::string password;
 	
-	std::cout << "Introduzca su nombre de usuario: ";
-	std::cin >> aux.nick;
+	std::cout << IYELLOW << "Introduzca su nombre de usuario: " << RESET;
+	getline(std::cin,nick);
+	strcpy(aux.nick,nick.c_str());
 	
-	std::cout << "Introduzca la password: ";
-	std::cin >> aux.password;
+	std::cout << IYELLOW << "Introduzca la password: " << RESET;
+	getline(std::cin,password);
+	strcpy(aux.password,password.c_str());
 	
-	std::cout << "Introduzca su clase: ";
-	std::cin >> aux.agenda;
+	strcpy(aux.agenda,"");
 	
-	std::cout << "Es coordinador? (0=no 1=si): ";
+	std::cout << IYELLOW << "Es coordinador? (1=si   otro valor=no): " << RESET;
 	std::cin >> coor;
-	
-	if(coor==0){
-		aux.coordinador=false;
-	}
 	
 	if(coor==1){
 		aux.coordinador=true;
 	}
 	
+	else{
+		aux.coordinador=false;
+	}
+	
 	std::fstream fichero("profesores.bin",std::ios::app | std::ios::in | std::ios::out | std::ios::binary);
 	
 	if(!fichero){
-		std::cout << "Error: no se pudo establecer la conexion con la base de datos" << std::endl;
+		std::cout << BRED << "Error: no se pudo establecer la conexion con la base de datos" << RESET << std::endl;
 		std::cin.ignore();
 		std::cin.ignore();
 		
@@ -136,7 +130,7 @@ bool registro(){
 	
 	fichero.close();
 	
-	std::cout << "Registro completado" << std::endl;
+	std::cout << std::endl << CYAN << "Registro completado" << RESET << std::endl;
 	std::cin.ignore();
 	std::cin.ignore();
 	
@@ -152,12 +146,10 @@ int menuSesion(){
 	std::cout << CLEAR_SCREEN;
 	
 	LUGAR(5,10);
-   	std::cout << BBLUE;
-	std::cout << "Programa principial | Opciones del menu";
-	std::cout << RESET;
+	std::cout << BBLUE << "Programa principial | Opciones del menu" << RESET;
 	
 	LUGAR(posicion++,10);
-	std::cout << "[1] Crear clase";
+	std::cout << "[1] Asignar clase";
 	
 	LUGAR(posicion++,10);
 	std::cout << "[2] Cargar clase";
@@ -187,9 +179,7 @@ int menuSesion(){
 	std::cout << GREEN << "[0] Salir";
 	
 	LUGAR(posicion++,20);
-	std::cout << IYELLOW;
-	std::cout << "Opcion: ";
-	std::cout << RESET;
+	std::cout << IYELLOW << "Opcion: " << RESET;
 	
 	std::cin >> opcion;
 	std::cin.ignore();
@@ -197,9 +187,14 @@ int menuSesion(){
 	return opcion;
 }
 
-void buscarAlumnos(Agenda &agenda){
-	if(agenda.getAgenda().empty()){
-		std::cout << "Error: la clase esta vacia" << std::endl;
+void buscarAlumnos(Profesor &profesor,Agenda &agenda){
+	if(profesor.getAgenda()==""){
+		std::cout << BRED << "Error: no tiene ninguna clase asignada" << RESET << std::endl;
+		std::cin.ignore();
+	}
+	
+	else if(agenda.getAgenda().empty()){
+		std::cout << BRED << "Error: la clase esta vacia" << RESET << std::endl;
 		std::cin.ignore();
 	}
 	
@@ -209,48 +204,55 @@ void buscarAlumnos(Agenda &agenda){
 		int equipo;
 		std::vector <Alumno> alumnos;
 	
-		std::cout << "Especifique como desea buscar a los alumnos :" << std::endl;
+		std::cout << IYELLOW << "Especifique como desea buscar a los alumnos :" << RESET << std::endl;
 		std::cout << "[1] Por DNI" << std::endl;
 		std::cout << "[2] Por grupo" << std::endl;
-				
+		std::cout << "Opcion: ";
 		std::cin >> busqueda;
 				
 		switch(busqueda){
 			case 1:
-				std::cout << "Introduzca el DNI del alumno a buscar: ";
-				std::cin >> dni;
+				std::cout << IYELLOW << "Introduzca el DNI del alumno a buscar: " << RESET;
+				std::cin.ignore();
+				getline(std::cin,dni);
 				
 				if(dni==""){
-					std::cout << "Error: no se ha introducido ningun DNI" << std::endl;
+					std::cout << BRED << "Error: no se ha introducido ningun DNI" << RESET << std::endl;
 				}
 				
 				else{
 					if(!agenda.existeAlumno(dni)){
-						std::cout << "Error: no existe ningun alumno con el DNI especificado" << std::endl;
+						std::cout << BRED << "Error: no existe ningun alumno con el DNI especificado" << RESET << std::endl;
 					}
 					
 					else{
-						agenda.buscarAlumnoDNI(dni);
+						agenda.buscarAlumnoDNI(dni).listarAlumno();
+						std::cin.ignore();
 					}
 				}
 						
 				break;
 					
 			case 2:
-				std::cout << "Introduzca el equipo del alumno a buscar: ";
+				std::cout << IYELLOW << "Introduzca el equipo del alumno a buscar: " << RESET;
 				std::cin >> equipo;
 				
 				if(equipo<=0){
-					std::cout << "Error: no se ha introducido ningun equipo valido" << std::endl;
+					std::cout << BRED << "Error: no se ha introducido ningun equipo valido" << RESET << std::endl;
 				}
 				
 				else{
 					if(!agenda.existeAlumno(equipo)){
-						std::cout << "Error: no existe el equipo especificado" << std::endl;
+						std::cout << BRED << "Error: no existe el equipo especificado" << RESET << std::endl;
 					}
 					
 					else{
 						alumnos=agenda.buscarAlumnoEquipo(equipo);
+						
+						for(unsigned int i=0;i<alumnos.size();i++){
+							alumnos[i].listarAlumno();
+							std::cout << std::endl;
+						}
 					}
 				}
 						
@@ -265,84 +267,205 @@ void buscarAlumnos(Agenda &agenda){
 	}
 }
 
-void insertarAlumno(Agenda &agenda){
-	std::string dni;
-	std::string nombre;
-	std::string apellidos;
-	std::string email;
-	std::string tlf;
-	std::string dir;
-	int curso;
-	std::string fecnac;
-	int equipo;
-	int numlider;
-	bool lider;
-		
-	std::cout << "Introduzca los datos del alumno: " << std::endl;
-	std::cout << "DNI: ";
-	std::cin >> dni;
-	
-	if(dni==""){
-		std::cout << "Error: no se ha introducido ningun DNI" << std::endl;
+void insertarAlumno(Profesor &profesor,Agenda &agenda){
+	if(profesor.getAgenda()==""){
+		std::cout << BRED << "Error: no tiene ninguna clase asignada" << RESET << std::endl;
+		std::cin.ignore();
 	}
 	
 	else{
-		if(agenda.existeAlumno(dni)){
-			std::cout << "Error: ya existe un alumno con el DNI especificado" << std::endl;
-		}
+		std::string dni;
+		std::string nombre;
+		std::string apellidos;
+		std::string email;
+		std::string tlf;
+		std::string dir;
+		int curso;
+		std::string fecnac;
+		int equipo;
+		int numlider;
+		bool lider;
 		
+		std::cout << IYELLOW << "Introduzca los datos del alumno: " << RESET << std::endl;
+		std::cout << "DNI: ";
+		getline(std::cin,dni);
+	
+		if(dni==""){
+			std::cout << BRED << "Error: no se ha introducido ningun DNI" << RESET << std::endl;
+		}
+	
 		else{
-			std::cout << "Nombre: ";
-			std::cin >> nombre;
-			std::cout << "Apellidos: ";
-			std::cin >> apellidos;
-			std::cout << "E-mail: ";
-			std::cin >> email;
-			std::cout << "Telefono: ";
-			std::cin >> tlf;
-			std::cout << "Direccion: ";
-			std::cin >> dir;
-			std::cout << "Curso: ";
-			std::cin >> curso;
-			std::cout << "Fecha de nacimiento: ";
-			std::cin >> fecnac;
-			std::cout << "Equipo: ";
-			std::cin >> equipo;
-			std::cout << "Lider (1=si): ";
-			std::cin >> numlider;
-	
-			if(numlider==1){
-				lider=true;
+			if(agenda.existeAlumno(dni)){
+				std::cout << BRED << "Error: ya existe un alumno con el DNI especificado" << RESET << std::endl;
 			}
-	
+		
 			else{
-				lider=false;
+				std::cout << "Nombre: ";
+				getline(std::cin,nombre);
+			
+				std::cout << "Apellidos: ";
+				getline(std::cin,apellidos);
+			
+				std::cout << "E-mail: ";
+				getline(std::cin,email);
+			
+				std::cout << "Telefono: ";
+				getline(std::cin,tlf);
+			
+				std::cout << "Direccion: ";
+				getline(std::cin,dir);
+			
+				std::cout << "Curso: ";
+				std::cin >> curso;
+				std::cin.ignore();
+			
+				std::cout << "Fecha de nacimiento: ";
+				getline(std::cin,fecnac);
+			
+				std::cout << "Equipo: ";
+				std::cin >> equipo;
+			
+				std::cout << "Lider (1=si   otro valor=no): ";
+				std::cin >> numlider;
+	
+				if(numlider==1){
+					lider=true;
+				}
+	
+				else{
+					lider=false;
+				}
+	
+				Alumno alumno(dni,nombre,apellidos,email,tlf,dir,curso,fecnac,equipo,lider);
+	
+				agenda.nuevoAlumno(alumno);
+			
+				std::cout << CYAN << "Alumno insertado correctamente" << RESET << std::endl;
 			}
-	
-			Alumno alumno(dni,nombre,apellidos,email,tlf,dir,curso,fecnac,equipo,lider);
-	
-			agenda.nuevoAlumno(alumno);
 		}
 	}
 }
 
-void borrarAlumno(Agenda &agenda){
-	std::string dni;
+void modificarAlumno(Profesor &profesor,Agenda &agenda){
+	if(profesor.getAgenda()==""){
+		std::cout << BRED << "Error: no tiene ninguna clase asignada" << RESET << std::endl;
+		std::cin.ignore();
+	}
 	
-	std::cout << "Introduzca el DNI del alumno a borrar: ";
-	std::cin >> dni;
-	
-	if(dni==""){
-		std::cout << "Error: no se ha introducido ningun DNI" << std::endl;
+	else if(agenda.getAgenda().empty()){
+		std::cout << BRED << "Error: la clase esta vacia" << RESET << std::endl;
+		std::cin.ignore();
 	}
 	
 	else{
-		if(!agenda.existeAlumno(dni)){
-			std::cout << "Error: no existe el alumno especificado" << std::endl;
+		std::string old_dni;
+		std::string dni;
+		std::string nombre;
+		std::string apellidos;
+		std::string email;
+		std::string tlf;
+		std::string dir;
+		int curso;
+		std::string fecnac;
+		int equipo;
+		int numlider;
+		bool lider;
+	
+		std::cout << IYELLOW << "Introduzca el DNI del alumno a modificar: " << RESET;
+		getline(std::cin,old_dni);
+		
+		if(old_dni==""){
+			std::cout << BRED << "Error: no se ha introducido ningun DNI" << RESET << std::endl;
+			std::cin.ignore();
 		}
 		
 		else{
-			agenda.eliminarAlumno(dni);
+			if(!agenda.existeAlumno(old_dni)){
+				std::cout << BRED << "Error: no existe el alumno especificado" << RESET << std::endl;
+				std::cin.ignore();
+			}
+			
+			else{
+				std::cout << "DNI: ";
+				getline(std::cin,dni);
+				
+				std::cout << "Nombre: ";
+				getline(std::cin,nombre);
+			
+				std::cout << "Apellidos: ";
+				getline(std::cin,apellidos);
+			
+				std::cout << "E-mail: ";
+				getline(std::cin,email);
+			
+				std::cout << "Telefono: ";
+				getline(std::cin,tlf);
+			
+				std::cout << "Direccion: ";
+				getline(std::cin,dir);
+			
+				std::cout << "Curso: ";
+				std::cin >> curso;
+				std::cin.ignore();
+			
+				std::cout << "Fecha de nacimiento: ";
+				getline(std::cin,fecnac);
+			
+				std::cout << "Equipo: ";
+				std::cin >> equipo;
+			
+				std::cout << "Lider (1=si   otro valor=no): ";
+				std::cin >> numlider;
+	
+				if(numlider==1){
+					lider=true;
+				}
+	
+				else{
+					lider=false;
+				}
+	
+				Alumno alumno(dni,nombre,apellidos,email,tlf,dir,curso,fecnac,equipo,lider);
+				
+				agenda.actuAlumno(old_dni,alumno);
+				
+				std::cout << CYAN << "Alumno modificado correctamente" << RESET << std::endl;
+			}
+		}
+	}
+}
+
+void borrarAlumno(Profesor &profesor,Agenda &agenda){
+	if(profesor.getAgenda()==""){
+		std::cout << BRED << "Error: no tiene ninguna clase asignada" << RESET << std::endl;
+		std::cin.ignore();
+	}
+	
+	else if(agenda.getAgenda().empty()){
+		std::cout << BRED << "Error: la clase esta vacia" << RESET << std::endl;
+		std::cin.ignore();
+	}
+	
+	else{
+		std::string dni;
+	
+		std::cout << IYELLOW << "Introduzca el DNI del alumno a borrar: " << RESET;
+		getline(std::cin,dni);
+	
+		if(dni==""){
+			std::cout << BRED << "Error: no se ha introducido ningun DNI" << RESET << std::endl;
+		}
+	
+		else{
+			if(!agenda.existeAlumno(dni)){
+				std::cout << BRED << "Error: no existe el alumno especificado" << RESET << std::endl;
+			}
+		
+			else{
+				agenda.eliminarAlumno(dni);
+			
+				std::cout << CYAN << "Alumno borrado correctamente" << RESET << std::endl;
+			}
 		}
 	}
 }

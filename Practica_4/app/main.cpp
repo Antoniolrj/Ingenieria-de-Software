@@ -22,14 +22,14 @@ int main(){
 				return 0;
 				
 			case 1:
-				std::cout << "[1] Iniciar sesion" << std::endl;
+				std::cout << "[1] Iniciar sesion" << std::endl << std::endl;
 				
 				iniciado=inicioSesion(profesor);
 				
 				break;
 				
 			case 2:
-				std::cout << "[2] Registrarse" << std::endl;
+				std::cout << "[2] Registrarse" << std::endl << std::endl;
 				
 				registro();
 				
@@ -50,68 +50,72 @@ int main(){
 				return 0;
 				
 			case 1:
-				std::cout << "[1] Crear clase" << std::endl;
+				std::cout << "[1] Asignar clase" << std::endl << std::endl;
 				
 				if(profesor.getCoordinador()){
-					crearClase(profesor);
+					asignarClase(profesor,agenda);
 				}
 				
 				break;
 				
 			case 2:
-				std::cout << "[2] Cargar clase" << std::endl;
+				std::cout << "[2] Cargar clase" << std::endl << std::endl;
 				
 				cargarClase(profesor,agenda);
 				
 				break;
 				
 			case 3:
-				std::cout << "[3] Guardar clase" << std::endl;
+				std::cout << "[3] Guardar clase" << std::endl << std::endl;
 				
 				guardarClase(profesor,agenda);
 				
 				break;
 				
 			case 4:
-				std::cout << "[4] Mostrar clase" << std::endl;
+				std::cout << "[4] Mostrar clase" << std::endl << std::endl;
 				
-				mostrarClase(agenda);
+				mostrarClase(profesor,agenda);
 				
 				break;
 				
 			case 5:
-				std::cout << "[5] Borrar clase" << std::endl;
+				std::cout << "[5] Borrar clase" << std::endl << std::endl;
 				
-				borrarClase(agenda);
+				borrarClase(profesor,agenda);
 				
 				break;
 				
 			case 6:
-				std::cout << "[6] Buscar alumnos" << std::endl;
+				std::cout << "[6] Buscar alumnos" << std::endl << std::endl;
 				
-				buscarAlumnos(agenda);
+				buscarAlumnos(profesor,agenda);
 				
 				break;
 				
 			case 7:
-				std::cout << "[7] Insertar alumno" << std::endl;
+				std::cout << "[7] Insertar alumno" << std::endl << std::endl;
 				
 				if(profesor.getCoordinador()){
-					insertarAlumno(agenda);
+					insertarAlumno(profesor,agenda);
 				}
 				
 				break;
 				
 			case 8:
-				std::cout << "[8] Modificar alumno" << std::endl;
+				std::cout << "[8] Modificar alumno" << std::endl << std::endl;
+				
+				if(profesor.getCoordinador()){
+					modificarAlumno(profesor,agenda);
+				}
 				
 				break;
 				
 			case 9:
-				std::cout << "[9] Borrar alumno" << std::endl;
+				std::cout << "[9] Borrar alumno" << std::endl << std::endl;
 				
 				if(profesor.getCoordinador()){
-					borrarAlumno(agenda);
+					borrarAlumno(profesor,agenda);
 				}
 				
 				break;

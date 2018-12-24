@@ -88,10 +88,6 @@ void Agenda::actuAlumno(const std::string &dni,Alumno &a){
 			agenda_[i]=a;
 		}
 	}
-	
-	#ifndef NDEBUG
-		assert(agenda_[i]==a);
-	#endif
 }
 
 void Agenda::eliminarAlumno(const std::string &dni){

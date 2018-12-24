@@ -164,13 +164,13 @@ class Alumno{
 			std::cout << "DNI -> \t\t" << dni_ << std::endl;
 			std::cout << "Nombre -> \t" << nombre_ << std::endl;
 			std::cout << "Apellidos -> \t" << apellidos_ << std::endl;
-			std::cout << "Email -> \t\t" << email_ << std::endl;
+			std::cout << "Email -> \t" << email_ << std::endl;
 			std::cout << "Tlf -> \t\t" << tlf_ << std::endl;
 			std::cout << "Dir -> \t\t" << dir_ << std::endl;
-			std::cout << "Curso -> \t\t" << curso_ << std::endl;
+			std::cout << "Curso -> \t" << curso_ << std::endl;
 			std::cout << "Fecha Nac -> \t" << fecnac_ << std::endl;
 			std::cout << "Equipo -> \t" << equipo_ << std::endl;
-			std::cout << "Lider -> \t\t";
+			std::cout << "Lider -> \t";
 			
 			if(getLider()){
 				std::cout << "Si\n";
