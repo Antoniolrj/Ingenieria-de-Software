@@ -66,7 +66,7 @@ Esta opción permitirá buscar un alumno por su DNI, nombre, apellido o grupo al
 
 Si la información indicada para realizar la búsqueda no existe o es erróneo, se indicará por pantalla y será devuelto al menú principal.
 
-#### 7.Insertar alumno
+#### 7. Insertar alumno
 
 Esta opción permitirá almacenar un alumno en el sistema, con la información de ese alumno, como DNI, nombre y apellido. Los campos de nombre, apellidos, DNI y grupo al que pertenecen serán obligatorios para poder almacenar el alumno en el sistema.
 
