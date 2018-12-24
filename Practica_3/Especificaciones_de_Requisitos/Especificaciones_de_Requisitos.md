@@ -39,6 +39,8 @@ La prioridad de cada uno de los requisitos vendrá determinada por una numeraci�
 	* Por apellido
 	* Por curso matriculado
 	
+8.  (**2**) El profesor deberá ser capaz de registrarse en el sistema.
+	
 ### Requisitos no Funcionales
 
 1. (**1**) La herramienta deberá funcionar bajo sistemas GNU/Linux.
